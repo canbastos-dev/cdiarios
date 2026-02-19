@@ -27,8 +27,32 @@ A string de conexão utilizada define os parâmetros essenciais: endereço do se
 Essa abordagem garante uma camada de abstração padronizada entre a aplicação e o banco de dados, permitindo a execução de comandos SQL com controle transacional gerenciado pelo driver.
 
 ## Tela conexão
-
+![Tela de configuração conexão ODBC](/Prints/BD_Estrutura_Conexao.png "ODBC FIREBIRD 2.0")
 
 
 # Principais telas do sistema e suas funcionalidades
 
+![Tela de Aplicativo](/Prints/Aplicativo_Menu.png "Menu Principal")
+Tela do menu principal, a direita painel de Opções Rápidas, atalho para procedimentos mais utilizados.
+
+![Tela de Aplicativo](/Prints/Aplicativo_Cadastro.png "Cadastro de Associados")
+Tela do cadastro de associados, multifuncional em operações, possibilitando múltiplas pesquisas em um painel .
+
+![Tela de Aplicativo](/Prints/Aplicativo_Cadastro_Operacoes.png "Cadastro de Associados")
+Filtrando o cadastro principalna própria tela de cadastros, obtendo resultado em uma tabela.
+
+![Tela de Aplicativo](/Prints/Aplicativo_Cadastro_Operacoes_ControleDep.png "Cadastro de Associados")
+Através do filtro, obtendo informações complementares sobre o associado e liberação de dependentes.
+
+![Tela de Aplicativo](/Prints/Aplicativo_Cadastro_Operacoes_IntegracaoFin.png "Cadastro de Associados")
+
+![Tela de Aplicativo](/Prints/Aplicativo_Cadastro_Operacoes_IntegracaoFinPagos.png "Cadastro de Associados")
+Navegando pela grade e pelas abas, informações consolidadas, filtradas do Financeiro.
+
+![Tela de Aplicativo](/Prints/Aplicativo_BaixaTitCEF.png "Cadastro de Associados")
+Importação de informações produzidas por terceiros para baixas automatizadas.
+
+
+![RELATORIOS](/Prints/Aplicativo_CadastroRelatorio.png "Relatórios de cadastro")
+![RELATORIOS](/Prints/Aplicativo_RelatorioCadastro.png "Lista condicionada para Votações")
+Relatórios cadastrais e de Liberação para Votações, dependendo da tipo do Título do associado e da sua condição de adimplência financeira.
