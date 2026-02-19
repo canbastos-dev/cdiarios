@@ -56,3 +56,4 @@ Importação de informações produzidas por terceiros para baixas automatizadas
 ![RELATORIOS](/Prints/Aplicativo_CadastroRelatorio.png "Relatórios de cadastro")
 ![RELATORIOS](/Prints/Aplicativo_RelatorioCadastro.png "Lista condicionada para Votações")
 Relatórios cadastrais e de Liberação para Votações, dependendo da tipo do Título do associado e da sua condição de adimplência financeira.
+
