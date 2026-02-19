@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DATAPACKET Version="2.0"><METADATA><FIELDS><FIELD attrname="PAGTO" fieldtype="string" WIDTH="10"></FIELD><FIELD attrname="SOCIO" fieldtype="string" WIDTH="50"></FIELD><FIELD attrname="DOCUMENTO" fieldtype="string" WIDTH="20"></FIELD><FIELD attrname="TITULO" fieldtype="string" WIDTH="20"></FIELD><FIELD attrname="VALOR" fieldtype="string" WIDTH="15"></FIELD></FIELDS><PARAMS DEFAULT_ORDER="2" LCID="2057"></PARAMS></METADATA><ROWDATA></ROWDATA></DATAPACKET>

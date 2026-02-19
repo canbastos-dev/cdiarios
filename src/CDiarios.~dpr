@@ -1,0 +1,81 @@
+program CDiarios;
+
+uses
+  Forms,
+  u_MenuPrincipal in 'u_MenuPrincipal.pas' {f_MenuPrincipal},
+  u_Dados in 'u_Dados.pas' {dm_Dados: TDataModule},
+  u_CadAssociados in 'u_CadAssociados.pas' {f_CadAssociados},
+  u_CadBairros in 'u_CadBairros.pas' {f_CadBairros},
+  u_Splash in 'u_Splash.pas' {f_Splash},
+  u_CadUsuarios in 'u_CadUsuarios.pas' {f_CadUsuarios},
+  u_Acesso in 'u_Acesso.pas' {f_Acesso},
+  u_CadMunicipios in 'u_CadMunicipios.pas' {f_CadMunicipios},
+  u_CadEstCivil in 'u_CadEstCivil.pas' {f_CadEstCivil},
+  u_CadCategorias in 'u_CadCategorias.pas' {f_CadCategorias},
+  u_CadSituacao in 'u_CadSituacao.pas' {f_CadSituacao},
+  u_CadParentescos in 'u_CadParentescos.pas' {f_CadParentescos},
+  FBackup in 'FBackup.pas' {frmBackup},
+  u_BaixaPagtosEletronico in 'u_BaixaPagtosEletronico.pas' {f_BaixaPagtosEletronico},
+  u_CadFPagtos in 'u_CadFPagtos.pas' {f_CadFPagtos},
+  u_MenuImportar in 'u_MenuImportar.pas' {f_MenuImportar},
+  u_BaixaPagtosManual in 'u_BaixaPagtosManual.pas' {f_BaixaPagtosManual},
+  u_relRecibo in 'u_relRecibo.pas' {f_relRecibo},
+  u_AssociadoAcoesEscolha in 'u_AssociadoAcoesEscolha.pas' {f_AssociadoAcoesEscolha},
+  u_CadDescricaoPadrao in 'u_CadDescricaoPadrao.pas' {f_CadDescricaoPadrao},
+  u_relListaFormCadAssociado in 'u_relListaFormCadAssociado.pas' {f_relListaFormCadAssociado},
+  u_relRecebimentosData in 'u_relRecebimentosData.pas' {f_relRecebimentosData},
+  u_FiltraPeriodo in 'u_FiltraPeriodo.pas' {f_FiltraPeriodo},
+  u_BuscaRecibo in 'u_BuscaRecibo.pas' {f_BuscaRecibo},
+  u_relFichaAssociado in 'u_relFichaAssociado.pas' {f_relFichaAssociado},
+  u_CadTransferencias in 'u_CadTransferencias.pas' {f_CadTransferencias},
+  u_relRecibosporPeriodo in 'u_relRecibosporPeriodo.pas' {f_relRecibosporPeriodo},
+  u_FormLiberacao in 'u_FormLiberacao.pas' {f_FormLiberacao},
+  u_relFichaAcordo in 'u_relFichaAcordo.pas' {f_relFichaAcordo},
+  u_FormLiberacaoAtivos in 'u_FormLiberacaoAtivos.pas' {f_FormLiberacaoAtivos},
+  uPrincipal in 'uPrincipal.pas' {f_ImportaExcel},
+  u_RelListaAdimplentes in 'u_RelListaAdimplentes.pas' {f_RelListaAdimplentes},
+  u_PesquisaAvancada in 'u_PesquisaAvancada.pas' {f_PesquisaAvancada},
+  u_relRecebimentosDataAgrupamento in 'u_relRecebimentosDataAgrupamento.pas' {f_relRecebimentosDataAgrupamento},
+  u_relRelatorioInadimplentes in 'u_relRelatorioInadimplentes.pas' {f_relRelatorioInadimplentes},
+  u_relTitulosAbertos in 'u_relTitulosAbertos.pas' {f_relTitulosAbertos},
+  u_FiltraPeriodo2 in 'u_FiltraPeriodo2.pas' {f_FiltraPeriodo2},
+  u_relTitulosAbertosSintetico in 'u_relTitulosAbertosSintetico.pas' {f_relTitulosAbertosSintetico},
+  u_RelListaAptosEleicao in 'u_RelListaAptosEleicao.pas' {f_RelListaAptosEleicao},
+  u_AtualizandoBase in 'u_AtualizandoBase.pas' {f_AtualizandoBase},
+  u_CadUsuariosServicos in 'u_CadUsuariosServicos.pas' {f_CadUsuariosServicos},
+  u_CadServicosClube in 'u_CadServicosClube.pas' {f_CadServicosClube},
+  u_CadUsuariosTipo in 'u_CadUsuariosTipo.pas' {f_CadUsuariosTipo},
+  u_relListaFormCadUsuarioServico in 'u_relListaFormCadUsuarioServico.pas' {f_relListaFormCadUsuarioServico},
+  u_BaixaPagtosServicos in 'u_BaixaPagtosServicos.pas' {f_BaixaPagtosServicos},
+  u_relRecebimentosServicosAgrupamento in 'u_relRecebimentosServicosAgrupamento.pas' {f_relRecebimentosServicosAgrupamento},
+  u_ConfigRelCadastroAss in 'u_ConfigRelCadastroAss.pas' {f_ConfigRelCadastroAss};
+
+{$R *.res}
+
+begin
+  f_Splash:=Tf_Splash.Create(Application);
+  f_Splash.ShowModal;
+  f_Splash.Refresh;
+
+  Application.Initialize;
+//  Application.CreateForm(Tf_MenuPrincipal, f_MenuPrincipal);
+  f_Splash.free;
+
+  Application.CreateForm(Tdm_Dados, dm_Dados);
+  Application.CreateForm(Tf_relRecebimentosDataAgrupamento, f_relRecebimentosDataAgrupamento);
+  Application.CreateForm(Tf_relRelatorioInadimplentes, f_relRelatorioInadimplentes);
+  Application.CreateForm(Tf_relTitulosAbertos, f_relTitulosAbertos);
+  Application.CreateForm(Tf_FiltraPeriodo2, f_FiltraPeriodo2);
+  Application.CreateForm(Tf_relTitulosAbertosSintetico, f_relTitulosAbertosSintetico);
+  Application.CreateForm(Tf_RelListaAptosEleicao, f_RelListaAptosEleicao);
+  Application.CreateForm(Tf_AtualizandoBase, f_AtualizandoBase);
+  Application.CreateForm(Tf_ConfigRelCadastroAss, f_ConfigRelCadastroAss);
+  //  Application.CreateForm(Tf_BaixaPagtosServicos, f_BaixaPagtosServicos);
+  f_Acesso:=Tf_Acesso.Create(Application);
+  f_Acesso.ShowModal;
+  f_Acesso.Refresh;
+
+  f_Acesso.Free;
+  Application.Run;
+
+end.
