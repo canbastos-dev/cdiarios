@@ -1,0 +1,99 @@
+unit FBackup;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, IBServices, ComCtrls, Buttons, ImgList, Mask,
+  System.ImageList;
+
+type
+  TfrmBackup = class(TForm)
+    IBBackupService1: TIBBackupService;
+    PageControl1: TPageControl;
+    TabSheet2: TTabSheet;
+    BitBtn2: TBitBtn;
+    Label2: TLabel;
+    IBRestoreService1: TIBRestoreService;
+    ImageList1: TImageList;
+    TabSheet1: TTabSheet;
+    Label1: TLabel;
+    BitBtn1: TBitBtn;
+    edtBanco: TEdit;
+    edtData: TMaskEdit;
+    Button1: TButton;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmBackup: TfrmBackup;
+implementation
+
+uses u_dados;
+
+{$R *.dfm}
+
+procedure TfrmBackup.BitBtn1Click(Sender: TObject);
+begin
+  Try
+    with IBBackupService1 do
+    begin
+      Attach;
+      DatabaseName := edtBanco.Text;
+      //Adiciona ao Backup o Banco mudando o nome
+      //para colocar a data do backup
+      BackupFile.Add(Copy(edtBanco.Text, 1 , Length(edtBanco.Text)-4)+FormatDateTime('ddmmyyyyhhnn', now)+'.gbk');
+      Active := True;
+      ServiceStart;
+      close;
+      MessageDlg('Backup realizado com sucesso !', mtInformation, [mbOk], 0);
+    end;
+  except
+      MessageDlg('Erro no Backup ! Tente novamente', mtError, [mbOk], 0);
+  End;
+end;
+
+procedure TfrmBackup.BitBtn2Click(Sender: TObject);
+begin
+  IBRestoreService1.Params.Clear;
+  //Usuário e senha do banco de dados
+  IBRestoreService1.Params.Add('user_name=sysdba');
+  IBRestoreService1.Params.Add('password=masterkey');
+
+  with IBRestoreService1 do
+  begin
+    Attach;
+    Options := [Replace];
+    DatabaseName.Add(edtBanco.Text);
+    BackupFile.Add(Copy(edtBanco.Text, 1 , Length(edtBanco.Text)-4)+FormatDateTime('ddmmyyyyhhnn', StrToDateTime(edtData.Text))+'.gbk');
+    Active := True;
+    ServiceStart;
+    MessageDlg('Restauração realizada com sucesso !', mtInformation, [mbOk],0);
+  end;
+end;
+
+procedure TfrmBackup.FormShow(Sender: TObject);
+begin
+  dm_Dados.Conexao.Close;
+  IBBackupService1.Params.Clear;
+  //Caminho do banco de dados
+  edtBanco.Text := 'C:\cdiarios\DADOS\clubediarios.fdb';
+  //Usuário e senha do banco de dados
+  IBBackupService1.Params.Add('user_name=sysdba');
+  IBBackupService1.Params.Add('password=masterkey');
+  PageControl1.ActivePageIndex:=0;
+end;
+
+procedure TfrmBackup.Button1Click(Sender: TObject);
+begin
+close;
+end;
+
+end.

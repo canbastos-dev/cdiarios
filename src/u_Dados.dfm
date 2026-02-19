@@ -1,0 +1,614 @@
+object dm_Dados: Tdm_Dados
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Left = 214
+  Top = 60
+  Height = 556
+  Width = 734
+  object Conexao: TADOConnection
+    ConnectionString = 
+      'Provider=MSDASQL.1;Password=masterkey;Persist Security Info=True' +
+      ';User ID=sysdba;Data Source=fbCDiarios'
+    LoginPrompt = False
+    Provider = 'MSDASQL.1'
+    Left = 616
+    Top = 8
+  end
+  object q_manipula: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    Left = 616
+    Top = 64
+  end
+  object q_Bairros: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT IDBAIRRO, NOMEBAIRRO, IDCIDADE FROM TBBAIRROS'
+      'ORDER BY NOMEBAIRRO')
+    Left = 32
+    Top = 8
+    object q_BairrosIDBAIRRO: TIntegerField
+      FieldName = 'IDBAIRRO'
+    end
+    object q_BairrosNOMEBAIRRO: TStringField
+      FieldName = 'NOMEBAIRRO'
+      Size = 80
+    end
+    object q_BairrosIDCIDADE: TIntegerField
+      FieldName = 'IDCIDADE'
+    end
+  end
+  object d_Bairros: TDataSource
+    DataSet = q_Bairros
+    Left = 120
+    Top = 8
+  end
+  object d_EstCivil: TDataSource
+    DataSet = q_EstCivil
+    Left = 120
+    Top = 56
+  end
+  object q_EstCivil: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT IDESTADOCIVIL, NOMEESTADOCIVIL FROM TBESTADOCIVIL'
+      'ORDER BY NOMEESTADOCIVIL ')
+    Left = 32
+    Top = 56
+    object q_EstCivilIDESTADOCIVIL: TIntegerField
+      FieldName = 'IDESTADOCIVIL'
+    end
+    object q_EstCivilNOMEESTADOCIVIL: TStringField
+      FieldName = 'NOMEESTADOCIVIL'
+      Size = 80
+    end
+  end
+  object q_Municipios: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'select idmun, municipio, iduf, uf from w_municipios'
+      'order by municipio,uf')
+    Left = 32
+    Top = 104
+    object q_MunicipiosIDMUN: TIntegerField
+      FieldName = 'IDMUN'
+    end
+    object q_MunicipiosMUNICIPIO: TStringField
+      FieldName = 'MUNICIPIO'
+      Size = 80
+    end
+    object q_MunicipiosIDUF: TIntegerField
+      FieldName = 'IDUF'
+    end
+    object q_MunicipiosUF: TStringField
+      FieldName = 'UF'
+      Size = 80
+    end
+  end
+  object d_Municipios: TDataSource
+    DataSet = q_Municipios
+    Left = 120
+    Top = 104
+  end
+  object d_AssociadosCat: TDataSource
+    DataSet = q_AssociadosCat
+    Left = 120
+    Top = 152
+  end
+  object d_AssociadosSit: TDataSource
+    DataSet = q_AssociadosSit
+    Left = 120
+    Top = 200
+  end
+  object q_AssociadosCat: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'select idcatsocio, nomecategoria from tbassociadoscategoria'
+      'order by nomecategoria')
+    Left = 32
+    Top = 152
+    object q_AssociadosCatIDCATSOCIO: TIntegerField
+      FieldName = 'IDCATSOCIO'
+    end
+    object q_AssociadosCatNOMECATEGORIA: TStringField
+      FieldName = 'NOMECATEGORIA'
+      Size = 80
+    end
+  end
+  object q_AssociadosSit: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'select idsitsocio, nomesituacao from tbassociadossituacao'
+      'order by nomesituacao')
+    Left = 32
+    Top = 200
+    object q_AssociadosSitIDSITSOCIO: TIntegerField
+      FieldName = 'IDSITSOCIO'
+    end
+    object q_AssociadosSitNOMESITUACAO: TStringField
+      FieldName = 'NOMESITUACAO'
+      Size = 80
+    end
+  end
+  object q_Usuarios: TADOQuery
+    Connection = Conexao
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT'
+      '  u.IDUSUARIO,'
+      '  u.NOMEUSUARIO,'
+      '  u.NLOGIN,'
+      '  u.SENHA,'
+      '  u.EMAIL,'
+      '  u.DTINCLUSAO,'
+      '  u.DTALTERACAO,'
+      '  u.USINCLUSAO,'
+      '  u.USALTERACAO,'
+      '  u.DEFINIRSENHA,'
+      '  case u.SENHAOK when '#39'S'#39' then '#39'Sim'#39' else '#39'N'#227'o'#39' end SENHADEF,'
+      
+        '  (select b.nlogin from tbusuarios b where b.usinclusao=u.idusua' +
+        'rio) lg_inclusao,'
+      '  u.idtipo'
+      'FROM'
+      '  TBUSUARIOS u')
+    Left = 32
+    Top = 248
+    object q_UsuariosIDUSUARIO: TIntegerField
+      FieldName = 'IDUSUARIO'
+    end
+    object q_UsuariosNOMEUSUARIO: TStringField
+      FieldName = 'NOMEUSUARIO'
+      Size = 80
+    end
+    object q_UsuariosSENHA: TStringField
+      FieldName = 'SENHA'
+      Size = 10
+    end
+    object q_UsuariosEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 50
+    end
+    object q_UsuariosDTINCLUSAO: TDateField
+      FieldName = 'DTINCLUSAO'
+    end
+    object q_UsuariosDTALTERACAO: TDateField
+      FieldName = 'DTALTERACAO'
+    end
+    object q_UsuariosUSINCLUSAO: TIntegerField
+      FieldName = 'USINCLUSAO'
+    end
+    object q_UsuariosUSALTERACAO: TIntegerField
+      FieldName = 'USALTERACAO'
+    end
+    object q_UsuariosDEFINIRSENHA: TStringField
+      FieldName = 'DEFINIRSENHA'
+      FixedChar = True
+      Size = 1
+    end
+    object q_UsuariosLG_INCLUSAO: TStringField
+      FieldName = 'LG_INCLUSAO'
+    end
+    object q_UsuariosSENHADEF: TStringField
+      FieldName = 'SENHADEF'
+      FixedChar = True
+      Size = 3
+    end
+    object q_UsuariosNLOGIN: TStringField
+      FieldName = 'NLOGIN'
+    end
+    object q_UsuariosIDTIPO: TIntegerField
+      FieldName = 'IDTIPO'
+    end
+  end
+  object d_Usuarios: TDataSource
+    DataSet = q_Usuarios
+    Left = 120
+    Top = 248
+  end
+  object q_Parentescos: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM TBPARENTESCOS'
+      'ORDER BY NOMEPARENTESCO')
+    Left = 32
+    Top = 296
+    object q_ParentescosIDPARENTESCO: TIntegerField
+      FieldName = 'IDPARENTESCO'
+    end
+    object q_ParentescosNOMEPARENTESCO: TStringField
+      FieldName = 'NOMEPARENTESCO'
+      Size = 80
+    end
+    object q_ParentescosDTINCLUSAO: TDateField
+      FieldName = 'DTINCLUSAO'
+    end
+    object q_ParentescosDTALTERACAO: TDateField
+      FieldName = 'DTALTERACAO'
+    end
+    object q_ParentescosUSINCLUSAO: TIntegerField
+      FieldName = 'USINCLUSAO'
+    end
+    object q_ParentescosUSALTERACAO: TIntegerField
+      FieldName = 'USALTERACAO'
+    end
+  end
+  object d_parentescos: TDataSource
+    DataSet = q_Parentescos
+    Left = 120
+    Top = 296
+  end
+  object q_FormasPatgo: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'select * from tbformaspagto'
+      'order by formapagto')
+    Left = 32
+    Top = 344
+    object q_FormasPatgoIDCODIGO: TIntegerField
+      FieldName = 'IDCODIGO'
+    end
+    object q_FormasPatgoFORMAPAGTO: TStringField
+      FieldName = 'FORMAPAGTO'
+      Size = 80
+    end
+    object q_FormasPatgoNDIAS: TIntegerField
+      FieldName = 'NDIAS'
+    end
+    object q_FormasPatgoDTINCLUSAO: TDateField
+      FieldName = 'DTINCLUSAO'
+    end
+    object q_FormasPatgoDTALTERACAO: TDateField
+      FieldName = 'DTALTERACAO'
+    end
+    object q_FormasPatgoUSINCLUSAO: TIntegerField
+      FieldName = 'USINCLUSAO'
+    end
+    object q_FormasPatgoUSALTERACAO: TIntegerField
+      FieldName = 'USALTERACAO'
+    end
+  end
+  object d_FormasPagto: TDataSource
+    DataSet = q_FormasPatgo
+    Left = 120
+    Top = 344
+  end
+  object q_Titulos: TADOQuery
+    Connection = Conexao
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT'
+      '  NUMEROACAO,'
+      '  IDASSOCIADO,'
+      '  ASSOCIADO,'
+      '  VALORACAO,'
+      '  ATIVA,'
+      '  IDREGCADASSOCIADOS,'
+      '  TITULOSDEB, '
+      '  TIPOTITULO'
+      'FROM'
+      '  W_ASSOCIADOSACOES')
+    Left = 32
+    Top = 392
+    object q_TitulosNUMEROACAO: TIntegerField
+      FieldName = 'NUMEROACAO'
+    end
+    object q_TitulosIDASSOCIADO: TIntegerField
+      FieldName = 'IDASSOCIADO'
+    end
+    object q_TitulosASSOCIADO: TStringField
+      FieldName = 'ASSOCIADO'
+      Size = 80
+    end
+    object q_TitulosVALORACAO: TBCDField
+      FieldName = 'VALORACAO'
+      Precision = 18
+      Size = 2
+    end
+    object q_TitulosATIVA: TStringField
+      FieldName = 'ATIVA'
+      FixedChar = True
+      Size = 1
+    end
+    object q_TitulosIDREGCADASSOCIADOS: TIntegerField
+      FieldName = 'IDREGCADASSOCIADOS'
+    end
+    object q_TitulosTITULOSDEB: TIntegerField
+      FieldName = 'TITULOSDEB'
+    end
+    object q_TitulosTIPOTITULO: TIntegerField
+      FieldName = 'TIPOTITULO'
+    end
+  end
+  object d_Titulos: TDataSource
+    DataSet = q_Titulos
+    Left = 120
+    Top = 392
+  end
+  object q_DescPadrao: TADOQuery
+    Connection = Conexao
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT'
+      '  IDCODIGO,'
+      '  IDDOTACAO,'
+      '  NOMEDESCRICAO,'
+      '  IDCENTROCUSTO,'
+      '  IDCONTACONTABIL,'
+      '  USALTERACAO,'
+      '  USINCLUSAO,'
+      '  DTALTERACAO,'
+      '  DTINCLUSAO'
+      'FROM'
+      '  TBDESCRICOESPADRAO'
+      'ORDER BY NOMEDESCRICAO')
+    Left = 32
+    Top = 440
+    object q_DescPadraoIDCODIGO: TIntegerField
+      FieldName = 'IDCODIGO'
+    end
+    object q_DescPadraoIDDOTACAO: TIntegerField
+      FieldName = 'IDDOTACAO'
+    end
+    object q_DescPadraoNOMEDESCRICAO: TStringField
+      FieldName = 'NOMEDESCRICAO'
+      Size = 80
+    end
+    object q_DescPadraoIDCENTROCUSTO: TIntegerField
+      FieldName = 'IDCENTROCUSTO'
+    end
+    object q_DescPadraoIDCONTACONTABIL: TIntegerField
+      FieldName = 'IDCONTACONTABIL'
+    end
+    object q_DescPadraoUSALTERACAO: TIntegerField
+      FieldName = 'USALTERACAO'
+    end
+    object q_DescPadraoUSINCLUSAO: TIntegerField
+      FieldName = 'USINCLUSAO'
+    end
+    object q_DescPadraoDTALTERACAO: TDateField
+      FieldName = 'DTALTERACAO'
+    end
+    object q_DescPadraoDTINCLUSAO: TDateField
+      FieldName = 'DTINCLUSAO'
+    end
+  end
+  object d_DescPadrao: TDataSource
+    DataSet = q_DescPadrao
+    Left = 120
+    Top = 440
+  end
+  object q_Configuracoes: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'select * from tbconfiguracoes')
+    Left = 616
+    Top = 112
+    object q_ConfiguracoesNUMRECIBO: TIntegerField
+      FieldName = 'NUMRECIBO'
+    end
+    object q_ConfiguracoesNUMTITULO: TIntegerField
+      FieldName = 'NUMTITULO'
+    end
+    object q_ConfiguracoesNUMASSOCIADO: TIntegerField
+      FieldName = 'NUMASSOCIADO'
+    end
+    object q_ConfiguracoesACORDOQUITACAO: TIntegerField
+      FieldName = 'ACORDOQUITACAO'
+    end
+    object q_ConfiguracoesCODIGOLIBERACAO: TStringField
+      FieldName = 'CODIGOLIBERACAO'
+      Size = 15
+    end
+    object q_ConfiguracoesVALORREATIVACAO: TBCDField
+      FieldName = 'VALORREATIVACAO'
+      Precision = 18
+      Size = 2
+    end
+    object q_ConfiguracoesCAIXA_SEQ_FILE: TIntegerField
+      FieldName = 'CAIXA_SEQ_FILE'
+    end
+    object q_ConfiguracoesCAIXA_SEQ_LOTE: TIntegerField
+      FieldName = 'CAIXA_SEQ_LOTE'
+    end
+    object q_ConfiguracoesCAIXA_SEQ_REMESSA: TIntegerField
+      FieldName = 'CAIXA_SEQ_REMESSA'
+    end
+    object q_ConfiguracoesREMESSA: TIntegerField
+      FieldName = 'REMESSA'
+    end
+    object q_ConfiguracoesENVIOABERTO: TIntegerField
+      FieldName = 'ENVIOABERTO'
+    end
+    object q_ConfiguracoesPERC_ACAD_CLUBE: TFloatField
+      FieldName = 'PERC_ACAD_CLUBE'
+    end
+    object q_ConfiguracoesPERC_ACAD_PARCEIRO: TFloatField
+      FieldName = 'PERC_ACAD_PARCEIRO'
+    end
+  end
+  object q_Boletos: TADOQuery
+    Connection = Conexao
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'c'
+        Attributes = [paNullable]
+        DataType = ftString
+        Precision = 40
+        Size = 40
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT'
+      '  IDCODIGO,'
+      '  IDTITULO,'
+      '  IDASSOCIADO,'
+      '  DTEMISSAO,'
+      '  NUMDOC,'
+      '  DTVENCIMENTO,'
+      '  VALORDOC,'
+      '  ABERTO,'
+      '  DTPAGAMENTO,'
+      '  ACRESCIMO,'
+      '  DESCONTO,'
+      '  VALORPAGO,'
+      '  USALTERACAO,'
+      '  USINCLUSAO,'
+      '  DTALTERACAO,'
+      '  DTINCLUSAO,'
+      '  TIPOBAIXA'
+      'FROM'
+      '  TBBOLETOS'
+      'WHERE  NUMDOC=:c')
+    Left = 208
+    Top = 8
+    object q_BoletosIDCODIGO: TIntegerField
+      FieldName = 'IDCODIGO'
+    end
+    object q_BoletosIDTITULO: TIntegerField
+      FieldName = 'IDTITULO'
+    end
+    object q_BoletosIDASSOCIADO: TIntegerField
+      FieldName = 'IDASSOCIADO'
+    end
+    object q_BoletosDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object q_BoletosNUMDOC: TStringField
+      FieldName = 'NUMDOC'
+      Size = 40
+    end
+    object q_BoletosDTVENCIMENTO: TDateField
+      FieldName = 'DTVENCIMENTO'
+    end
+    object q_BoletosVALORDOC: TBCDField
+      FieldName = 'VALORDOC'
+      Precision = 18
+      Size = 2
+    end
+    object q_BoletosABERTO: TStringField
+      FieldName = 'ABERTO'
+      FixedChar = True
+      Size = 1
+    end
+    object q_BoletosDTPAGAMENTO: TDateField
+      FieldName = 'DTPAGAMENTO'
+    end
+    object q_BoletosACRESCIMO: TBCDField
+      FieldName = 'ACRESCIMO'
+      Precision = 18
+      Size = 2
+    end
+    object q_BoletosDESCONTO: TBCDField
+      FieldName = 'DESCONTO'
+      Precision = 18
+      Size = 2
+    end
+    object q_BoletosVALORPAGO: TBCDField
+      FieldName = 'VALORPAGO'
+      Precision = 18
+      Size = 2
+    end
+    object q_BoletosUSALTERACAO: TIntegerField
+      FieldName = 'USALTERACAO'
+    end
+    object q_BoletosUSINCLUSAO: TIntegerField
+      FieldName = 'USINCLUSAO'
+    end
+    object q_BoletosDTALTERACAO: TDateField
+      FieldName = 'DTALTERACAO'
+    end
+    object q_BoletosDTINCLUSAO: TDateField
+      FieldName = 'DTINCLUSAO'
+    end
+    object q_BoletosTIPOBAIXA: TStringField
+      FieldName = 'TIPOBAIXA'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object q_FormaCob: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT'
+      '  IDCODIGO,'
+      '  DESCCOBRANCA,'
+      '  IDUSUARIO,'
+      '  DTALTERACAO'
+      'FROM'
+      '  TBFORMACOB')
+    Left = 216
+    Top = 104
+    object q_FormaCobIDCODIGO: TIntegerField
+      FieldName = 'IDCODIGO'
+    end
+    object q_FormaCobDESCCOBRANCA: TStringField
+      FieldName = 'DESCCOBRANCA'
+      Size = 40
+    end
+    object q_FormaCobIDUSUARIO: TIntegerField
+      FieldName = 'IDUSUARIO'
+    end
+    object q_FormaCobDTALTERACAO: TDateField
+      FieldName = 'DTALTERACAO'
+    end
+  end
+  object d_FormaCob: TDataSource
+    DataSet = q_FormaCob
+    Left = 304
+    Top = 104
+  end
+  object q_ServicosClube: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'select idcodigo, descricaoser from tbusuarioservicos')
+    Left = 216
+    Top = 152
+    object q_ServicosClubeIDCODIGO: TSmallintField
+      FieldName = 'IDCODIGO'
+    end
+    object q_ServicosClubeDESCRICAOSER: TStringField
+      FieldName = 'DESCRICAOSER'
+      Size = 40
+    end
+  end
+  object d_ServicosClube: TDataSource
+    DataSet = q_ServicosClube
+    Left = 304
+    Top = 152
+  end
+  object q_UsuariosTipo: TADOQuery
+    Connection = Conexao
+    Parameters = <>
+    SQL.Strings = (
+      'select idcodigo, descricaotipo from tbusuariostipo')
+    Left = 216
+    Top = 200
+    object q_UsuariosTipoIDCODIGO: TIntegerField
+      FieldName = 'IDCODIGO'
+    end
+    object q_UsuariosTipoDESCRICAOTIPO: TStringField
+      FieldName = 'DESCRICAOTIPO'
+      Size = 40
+    end
+  end
+  object d_UsuariosTipo: TDataSource
+    DataSet = q_UsuariosTipo
+    Left = 304
+    Top = 200
+  end
+end

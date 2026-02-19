@@ -1,0 +1,79 @@
+unit u_relListaFormCadAssociadoRes;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, QuickRpt, QRCtrls;
+
+type
+  Tf_relListaFormCadAssociadoRes = class(TForm)
+    QuickRep1: TQuickRep;
+    QRBand1: TQRBand;
+    QRBand2: TQRBand;
+    QRBand3: TQRBand;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRSysData3: TQRSysData;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    qrlFiltro: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRDBText10: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRLabel5: TQRLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure QRBand3AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand2BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+  private
+    { Private declarations }
+  public
+    vLinha:integer;
+    { Public declarations }
+  end;
+
+var
+  f_relListaFormCadAssociadoRes: Tf_relListaFormCadAssociadoRes;
+
+implementation
+
+uses u_CadAssociados;
+{$R *.dfm}
+
+procedure Tf_relListaFormCadAssociadoRes.FormCreate(Sender: TObject);
+begin
+  vLinha:=0;
+end;
+
+procedure Tf_relListaFormCadAssociadoRes.QRBand3AfterPrint(
+  Sender: TQRCustomBand; BandPrinted: Boolean);
+begin
+  vLinha:=0;
+end;
+
+procedure Tf_relListaFormCadAssociadoRes.QRBand2BeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+
+  if f_CadAssociados.q_DadosTITULOSDEB.Value>0 then qrlabel4.Caption:=inttostr(f_CadAssociados.q_DadosTITULOSDEB.Value)+'BA'
+  else qrlabel4.Caption:='';
+
+  if vLinha=0 then begin
+    vLinha:=1;
+    qrband2.Color:=$00E2E2E2;
+  end else begin
+    qrband2.Color:=clWhite;
+    vLinha:=0;
+  end;
+end;
+
+end.
