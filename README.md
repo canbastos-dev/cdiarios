@@ -1,23 +1,24 @@
 # Informações sobre o sistema
 
 ## Cliente: Clube dos Diários
-## Período: 2009 - 2011
+### Período de implantação: 2009 - 2011
+Última interveção técnica em 2020
 
-Registrar associados
+### Finalidade:
 
-Classificar associados por categorias: proprietário, remido, associado.
+Registrar associados, classificando pelo tipo de ação (título de propriedade) e suas movimentações financeiras referentes a operações com o clube:
+- Cadastrar de dependentes para controle de acesso a áreas de lazer e serviços. 
+- Registrar pagamentos de mensalidades, diretamente na secretaria do clube, ou por conciliação bancária, através de convênios com Lotéricas e Farmácias Pague Menos.
+- utilização de serviços do clube, documentos de identificação, escolinhas e academia;
+- Trocas de titularidade por venda do título entre associados e novos associados
+- Controle de acesso: usuários cadastrados, restrição de acesso por inadimplência financeira
 
-Registrar a emissão de títulos de propriedade (sócios proprietarios e remidos), e suas transferencias de titulardade. 
 
-Registrar dependentes de associados
-
-Registrar não-associados, usuários de serviços oferecidos pelo Clube
-
-Registrar serviços: emissão de carteiras, academia, sauna, escolinhas. 
-
-Controle de acesso: usuários cadastrados, restrição de acesso por inadimplência financeira
-
-Registrar movimentações financeiras: mensalidades de pagas via secretaria do clube ou por conciliação de pagamentos de mensalidades efetivadas em instituições terceirizadas (Banco CEF, Farmácias Pague Menos); receitas oriundas dos serviços prestados pelo clube. 
+A classificação do associados pode ser pelas categorias: 
+- Proprietário - Associado com título de propriedade, usufrui de tudo ofertado pelo clube sob condição de adimpência com o clube.
+- Remido - Sócio proprietário com qualificação específica. Não paga mensalidades, presta serviços ao clube voluntariamente. Para essa condição conta o tempo de associação.
+- Associado - Cliente sem título de propridade, paga mensalidade e tem a disponibilidade de todos os serviços ofertados, mediante acréscimos na mensalidade.
+- Visitante - Não possui vínculo com a instituição, nem mensalidade, contribuindo com as taxas de utilização pelos serviços. É uma condição temporária, devendo alertado pela secretaria da sua necessidade associação.
 
 ## Informações técnicas
 
